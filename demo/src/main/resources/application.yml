@@ -1,0 +1,13 @@
+tomcat:
+  ajp:
+    protocol: AJP/1.3
+    port: '18009'
+    enabled: 'true'
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+devtools:
+  livereload:
+    enabled: 'true'
