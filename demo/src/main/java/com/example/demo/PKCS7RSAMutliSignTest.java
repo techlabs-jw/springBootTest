@@ -2,6 +2,9 @@ package com.example.demo;//package test.pki2048;
 
 import java.security.cert.CertificateException;
 
+import org.springframework.core.io.DefaultResourceLoader;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import signgate.crypto.util.CertUtil;
 import signgate.crypto.util.FileUtil;
 import signgate.crypto.util.PKCS7Util;
@@ -19,12 +22,17 @@ import signgate.crypto.util.TimeUtil;
 
 
 // PKCS7 ��ƼSign ����
-public class PKCS7RSAMutliSignTest{
-
+public class PKCS7RSAMutliSignTest
+{
+	DefaultResourceLoader resourceLoader = new DefaultResourceLoader();
 	public void MutiliSignTest(String encryptionData) throws Exception {
-	
-		String signCertPath = SelfConfig.path + "signCert.der";
-		String signPriPath = SelfConfig.path + "signPri.key";
+
+		String path = null;
+		Resource resource = resourceLoader.getResource("classpath:static/cert/");
+		path = resource.getURI().getPath();
+
+		String signCertPath = path + "signCert.der";
+		String signPriPath = path + "signPri.key";
 
 		byte[] certBytes = FileUtil.readBytesFromFileName(signCertPath);
 		byte[] keyBytes = FileUtil.readBytesFromFileName(signPriPath);

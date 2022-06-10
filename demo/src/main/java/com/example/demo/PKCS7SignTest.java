@@ -5,18 +5,28 @@ import java.util.Set;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.DefaultResourceLoader;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.stereotype.Component;
 import signgate.crypto.util.CertUtil;
 import signgate.crypto.util.FileUtil;
 import signgate.crypto.util.PKCS7Util;
 import signgate.crypto.util.TimeUtil;
 
-// PKCS7 ���� ���� �� �������� ���� ����
+// PKCS7 ���� ���� �� �������� ���� ���
 public class PKCS7SignTest
 {
+	DefaultResourceLoader resourceLoader = new DefaultResourceLoader();
 	public String SignTest(String encryptionData) throws Exception
-	{	
-		String keyFilePath = SelfConfig.path + "signPri.key";
-		String certFilePath = SelfConfig.path + "signCert.der";		
+	{
+		String path = null;
+		Resource resource = resourceLoader.getResource("classpath:static/cert/");
+		path = resource.getURI().getPath();
+
+		String keyFilePath = path + "signPri.key";
+		String certFilePath = path + "signCert.der";
 		
 		byte[] certBytes = FileUtil.readBytesFromFileName( certFilePath );
 		byte[] keyBytes = FileUtil.readBytesFromFileName( keyFilePath );

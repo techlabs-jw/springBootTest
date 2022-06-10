@@ -3,6 +3,9 @@ package com.example.demo;//package test.pki2048;
 import java.io.IOException;
 import java.security.cert.CertificateException;
 
+import org.springframework.core.io.DefaultResourceLoader;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import signgate.crypto.util.Base64Util;
 import signgate.crypto.util.CertUtil;
 import signgate.crypto.util.CipherUtil;
@@ -11,6 +14,8 @@ import signgate.crypto.util.SignUtil;
 import signgate.crypto.util.TimeUtil;
 
 public class RSASigntoCipherTest {
+
+
 
 	/**
 	 * @param args
@@ -21,7 +26,12 @@ public class RSASigntoCipherTest {
 		String data = "sg";
 		
 		String keyFilePath = "C:/KICASecuXML/cert/web/signPri.key";
-		String certFilePath = "C:/KICASecuXML/cert/web/signCert.der";			
+		String certFilePath = "C:/KICASecuXML/cert/web/signCert.der";
+		
+		DefaultResourceLoader resourceLoader = null;
+		Resource resource = resourceLoader.getResource("classpath:/static/cert/");
+		SelfConfig.path = resource.getURI().getPath();
+
 		byte[] certBytes = FileUtil.readBytesFromFileName( certFilePath );
 		byte[] keyBytes = FileUtil.readBytesFromFileName( keyFilePath );	
 		

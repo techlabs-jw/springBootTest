@@ -1,5 +1,10 @@
 package com.example.demo;//package test.pki2048;
 
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
+
+import java.io.IOException;
+
 public class SelfConfig {
 	
 	// 1. ?????????? 2048bit ???? ??????
@@ -59,7 +64,11 @@ public class SelfConfig {
 	//static String path = "D:/cert/2048bit/??????????? ????? ?????? ??????/RSA2048_SHA256/cn=SGTest2048(expired7),ou=AccreditedCA,o=KICA,c=KR/";
 	//static String path = "D:/cert/2048bit/??????????? ????? ?????? ??????/RSA2048_SHA256/cn=SGTest2048(revoked7),ou=AccreditedCA,o=KICA,c=KR/";
 //	static String path = "D:/cert/2048bit/??????????? ????? ?????? ??????/RSA2048_SHA256/cn=SGTest2048(valid7),ou=AccreditedCA,o=KICA,c=KR/";
-	static String path = "/Users/hanjaewon/Downloads/SecuKitNXS_1.0.6.7/server/testcert/";
+	//static String path = "/Users/hanjaewon/Downloads/SecuKitNXS_1.0.6.7/server/testcert/";
+
+	//static String path = Data;
+	static String path = "classpath:/static/cert/";
+
 	//static String path = "/www/tcrm/litinglabs/cron/testcert/";
 
 	//static String path = "classpath:cert";
@@ -83,6 +92,9 @@ public class SelfConfig {
 	
 	// OCSP ??? ?????? ???
 	static String ocsppath = "D:/cert/2048bit/ocsp/RSA2048_SHA256/cn=SGTest2048(valid7),ou=AccreditedCA,o=KICA,c=KR";
+
+	public SelfConfig() throws IOException {
+	}
 }
 // DB 에 있는 데이터를 전자서명 하려면 어떤방법을 해야하는지 (DB에 텍스트로 집어넣는 데이터가 있음 ) / DB 에 있는 것 처리는 어떻게 하는지
 
