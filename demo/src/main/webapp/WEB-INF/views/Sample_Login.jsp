@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="signgate.crypto.util.*" %>
 <%@ page import="java.io.IOException" %>
-<%@ page import="org.springframework.core.io.Resource" %>
 <%@ page import="org.springframework.core.io.DefaultResourceLoader" %>
+<%@ page import="org.springframework.core.io.Resource" %>
 
 
 <!DOCTYPE html>
@@ -31,20 +31,21 @@
         }
     </script>
     <!-- //KICA SecuKit NXS -->
-<%--    <%--%>
-<%--        DefaultResourceLoader resourceLoader = new DefaultResourceLoader();--%>
-<%--        String path = null;--%>
-<%--        Resource resource = resourceLoader.getResource("classpath:static/cert/kmCert.der");--%>
-<%--        path = resource.getURI().getPath();--%>
-<%--        //서버인증서 가져오기(kmCert.der)--%>
-<%--        try {--%>
-<%--            byte[] ServerKmCert = FileUtil.readBytesFromFileName("classpath:static/cert/kmCert.der");--%>
-<%--             ServerKmCertPem = CertUtil.derToPem( ServerKmCert );--%>
-<%--        } catch(IOException e) {--%>
-<%--            System.out.println("IOE error");--%>
+    <%
+        String ServerKmCertPem = "";
+        DefaultResourceLoader resourceLoader = new DefaultResourceLoader();
+        String path = null;
+        Resource resource = resourceLoader.getResource("classpath:static/cert/kmCert.der");
+        //path = resource.getURI().getPath();
+        //서버인증서 가져오기(kmCert.der)
+        try {
+            byte[] ServerKmCert = FileUtil.readBytesFromFileName("classpath:static/cert/kmCert.der");
+             ServerKmCertPem = CertUtil.derToPem( ServerKmCert );
+        } catch(IOException e) {
+            System.out.println("IOE error");
 
-<%--        }--%>
-<%--    %>--%>
+        }
+    %>
 
     <script>
         // 타겟 미디어 비활성화 Set
