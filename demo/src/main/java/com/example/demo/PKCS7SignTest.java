@@ -1,10 +1,10 @@
 package com.example.demo;//package test.pki2048;
 
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
@@ -18,9 +18,15 @@ import signgate.crypto.util.TimeUtil;
 // PKCS7 ���� ���� �� �������� ���� ���
 public class PKCS7SignTest
 {
+	List<Map<String, String>> list = new ArrayList<Map<String, String>>();
+	HashMap<String, String> hashMap = new HashMap<String, String>();
 	DefaultResourceLoader resourceLoader = new DefaultResourceLoader();
-	public String SignTest(String encryptionData) throws Exception
+
+	public List<Map<String, String>> SignTest(String encryptionData) throws Exception
 	{
+		String policy = null;
+		String startPoint = null;
+		String endPoint = null;
 		String path = null;
 		Resource resource = resourceLoader.getResource("classpath:static/cert/");
 		path = resource.getURI().getPath();
@@ -90,21 +96,32 @@ public class PKCS7SignTest
 			while( it.hasNext() ) {
 				X509Certificate cert = (X509Certificate)it.next();
 				signcert = cert.getEncoded();
-				CertUtil cu = new CertUtil( signcert);
+				CertUtil cu = new CertUtil(signcert);
 
 				///
 				//	�ش� �������� Ư�����(3����) ������ ���� üũ �� ������ 
 				//	������� 15���̳��� �������� Ư�����(1��)���� �����ϵ��� �����Ѵ�.
 				//
-				System.out.println("�������� ��å Oid: " + cu.getPolicyOid());
-				System.out.println("������ �������: " + cu.getNotAfter());			
+				policy     = cu.getPolicyOid();
+				startPoint = cu.getNotBefore();
+				endPoint   = cu.getNotAfter();
+//				System.out.println("인증서 정책" + cu.getPolicyOid());
+//				System.out.println("인증서 유효시간 종료시점" + cu.getNotAfter());
 			}
 		}
 		else
 		{
 			System.out.println("P7 ���ڼ��� ���� ����");
 		}
+
+		hashMap.put("sign", signed);
+		hashMap.put("policy", policy);
+		hashMap.put("startPoint", startPoint);
+		hashMap.put("endPoint", endPoint);
+
+		list.add(hashMap);
+
 		timeutil.check();
-		return signed;
+		return list;
 	}
 }
