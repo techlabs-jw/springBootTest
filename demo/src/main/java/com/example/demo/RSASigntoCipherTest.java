@@ -15,8 +15,6 @@ import signgate.crypto.util.TimeUtil;
 
 public class RSASigntoCipherTest {
 
-
-
 	/**
 	 * @param args
 	 * @throws IOException 
