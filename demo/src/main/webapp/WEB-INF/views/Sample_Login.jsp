@@ -39,10 +39,10 @@
         //path = resource.getURI().getPath();
         //서버인증서 가져오기(kmCert.der)
         try {
-            byte[] ServerKmCert = FileUtil.readBytesFromFileName("classpath:static/cert/kmCert.der");
+            byte[] ServerKmCert = FileUtil.readBytesFromFileName(resource.getURI().getPath());
              ServerKmCertPem = CertUtil.derToPem( ServerKmCert );
         } catch(IOException e) {
-            System.out.println("IOE error");
+            System.out.println("IOE error jsp");
 
         }
     %>
@@ -475,7 +475,7 @@
             <td style="padding: 5px 0 10px 0;">
                 <font size='2'>
                     암호화된 대칭키 값 <br>
-                    <textarea rows="5" cols="64" id="encSessionKey" name='encSessionKey' '></textarea>
+                    <textarea rows="5" cols="64" id="encSessionKey" name='encSessionKey' '></font>
             </td>
             <br />
             <br />

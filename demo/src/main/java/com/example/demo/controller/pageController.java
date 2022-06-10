@@ -16,7 +16,7 @@ public class pageController {
     @GetMapping(value = "/")
     public String home(Model model) throws Exception {
         model.addAttribute("name", "TestControllerModelData");
-        return "Sample_Login";
+        return "index";
     }
 //    @PostMapping(value = "check")
 //    public String test (Model model) throws Exception {

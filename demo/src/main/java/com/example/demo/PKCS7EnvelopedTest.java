@@ -70,7 +70,7 @@ public class PKCS7EnvelopedTest
 			System.out.println("data: " + DecryptedData);
 			timeutil.check();
 		} catch (IOException e) {
-			System.out.println("IOE error");
+			System.out.println("IOE error PKCS");
 		}
 	}
 }

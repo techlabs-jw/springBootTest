@@ -12,6 +12,6 @@
     <title>Title</title>
 </head>
 <body>
-Test Hello ${name}
+Test Hello SpringBoot
 </body>
 </html>
