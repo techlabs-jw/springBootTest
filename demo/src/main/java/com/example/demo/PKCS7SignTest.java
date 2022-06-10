@@ -13,7 +13,7 @@ import signgate.crypto.util.TimeUtil;
 // PKCS7 ���� ���� �� �������� ���� ����
 public class PKCS7SignTest
 {
-	public static void main(String[] args) throws Exception
+	public String SignTest(String encryptionData) throws Exception
 	{	
 		String keyFilePath = SelfConfig.path + "signPri.key";
 		String certFilePath = SelfConfig.path + "signCert.der";		
@@ -26,11 +26,11 @@ public class PKCS7SignTest
 			certutil = new CertUtil(certBytes);
 			System.out.println(certutil.getSigAlgName());
 		} catch (CertificateException e1) {
-			System.out.println("���� ����: " + certutil.getErrorMsg() );
+			System.out.println("ErrorMessage : " + certutil.getErrorMsg() );
 			System.out.println("Exception: " + e1.toString() );
 		}
 		
-		String testData = "���� ���ڼ����� �����̿�~";
+		String testData = encryptionData;
 		
 		TimeUtil timeutil = new TimeUtil();
 		
@@ -42,7 +42,6 @@ public class PKCS7SignTest
 			signed = p7util.genSignedData(keyBytes, SelfConfig.passwd, certBytes, testData.getBytes());
 		}catch(Exception e){
 			System.out.println("Error : [" + p7util.getErrorMsg() + "]");
-			return;
 		}
 		
 		System.out.println("PKCS7 " + certutil.getSigAlgName() + " SignedData\n" + signed);
@@ -65,7 +64,7 @@ public class PKCS7SignTest
 		bverify = p7utilverify.verify(signed, null, null);
 		
 		if(bverify){
-			System.out.println("PKCS7 " + certutil.getSigAlgName() + " ����: " + bverify );
+			System.out.println("PKCS7 " + certutil.getSigAlgName() + " check: " + bverify );
 		}else{
 			System.out.println("Error : [" + p7utilverify.getErrorMsg() + "]");
 		}
@@ -96,5 +95,6 @@ public class PKCS7SignTest
 			System.out.println("P7 ���ڼ��� ���� ����");
 		}
 		timeutil.check();
+		return signed;
 	}
 }

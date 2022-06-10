@@ -3,18 +3,20 @@ package com.example.demo;//package test.pki2048;
 import java.io.IOException;
 import java.security.cert.CertificateException;
 
+import org.springframework.context.annotation.Import;
 import signgate.crypto.util.Base64Util;
 import signgate.crypto.util.CertUtil;
 import signgate.crypto.util.FileUtil;
 import signgate.crypto.util.SignUtil;
 import signgate.crypto.util.TimeUtil;
 
+
 //SHA1withRSA ���ڼ��� ����
 public class RSASignTest {
 
 	/**
-	 * @param args
-	 * @throws IOException 
+	  * @param args
+	  * @throws IOException
 	 */
 	public static void main(String[] args) throws IOException {
 		String keyFilePath = SelfConfig.path + "signPri.key";

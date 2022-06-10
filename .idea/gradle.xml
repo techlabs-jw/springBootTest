@@ -4,12 +4,15 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
+        <option name="delegatedBuild" value="false" />
+        <option name="testRunner" value="PLATFORM" />
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/demo" />
         <option name="gradleJvm" value="liberica-1.8 (2)" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/demo" />
+            <option value="$PROJECT_DIR$/demo/webapp" />
           </set>
         </option>
       </GradleProjectSettings>

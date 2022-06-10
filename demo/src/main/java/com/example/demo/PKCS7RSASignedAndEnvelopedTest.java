@@ -153,9 +153,9 @@ public class PKCS7RSASignedAndEnvelopedTest
 
 		/* PKCS#7 ��ȿ�� ���� start */
 		
-		String crlPath = "C:/KICASecuXML/CRL";
+		//String crlPath = "C:/KICASecuXML/CRL";
 		try{
-			 boolean valid_check = p7utilverify.isValidCertificate(true, crlPath);
+			 boolean valid_check = p7utilverify.isValidCertificate(true, SelfConfig.crlPath);
 			 if(valid_check){
 				 System.out.println("������ ��ȿ�� ���� ����");
 

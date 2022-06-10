@@ -21,7 +21,7 @@ import signgate.crypto.util.TimeUtil;
 // PKCS7 ��ƼSign ����
 public class PKCS7RSAMutliSignTest{
 
-	public static void main(String[] args) throws Exception {		
+	public void MutiliSignTest(String encryptionData) throws Exception {
 	
 		String signCertPath = SelfConfig.path + "signCert.der";
 		String signPriPath = SelfConfig.path + "signPri.key";
@@ -29,14 +29,16 @@ public class PKCS7RSAMutliSignTest{
 		byte[] certBytes = FileUtil.readBytesFromFileName(signCertPath);
 		byte[] keyBytes = FileUtil.readBytesFromFileName(signPriPath);
 
-		String testData = "1234567890abcdefghijklmnopqrstuvwxyz���ѹα�";	
+		//String testData = "1234567890abcdefghijklmnopqrstuvwxyz���ѹα�";
+		String testData = encryptionData;
+		System.out.println(testData);
 		
 		CertUtil certutil = null;
 		try {
 			certutil = new CertUtil(certBytes);
 			System.out.println(certutil.getSigAlgName());
 		} catch (CertificateException e1) {
-			System.out.println("���� ����: " + certutil.getErrorMsg() );
+			System.out.println("errorMessage: " + certutil.getErrorMsg() );
 			System.out.println("Exception: " + e1.toString() );
 		}
 
@@ -59,13 +61,13 @@ public class PKCS7RSAMutliSignTest{
 		}
 		timeutil.check();
 
-		System.out.println("ù��° PKCS#7 SignedData ������: \n" + p7sign1);
+		System.out.println("PKCS#7 SignedData Information1: \n" + p7sign1);
 		System.out.println("");
 		timeutil = new TimeUtil();
 
 		boolean p7sign1_check = p7utilverify.verify(p7sign1);
 
-		System.out.println("ù��° PKCS#7 SignedData ����: " + p7sign1_check);
+		System.out.println("PKCS#7 SignedData check1: " + p7sign1_check);
 		System.out.println("");
 		timeutil.check();
 
@@ -79,14 +81,14 @@ public class PKCS7RSAMutliSignTest{
 			return;
 		}
 
-		System.out.println("�ι�° PKCS#7 SignedData ������: \n" + p7sign2);
+		System.out.println("PKCS#7 SignedData Information2: \n" + p7sign2);
 		System.out.println("");
 		timeutil.check();
 		
 		timeutil = new TimeUtil();
 		boolean p7sign2_check = p7utilverify.verify(p7sign2);
 
-		System.out.println("�ι�° PKCS#7 SignedData ����: " + p7sign2_check);
+		System.out.println("PKCS#7 SignedData Check2: " + p7sign2_check);
 		System.out.println("");
 		timeutil.check();
 		
@@ -99,12 +101,12 @@ public class PKCS7RSAMutliSignTest{
 			return;
 		}
 		timeutil.check();
-		System.out.println("����° PKCS#7 SignedData ������: \n" + p7sign3);	
+		System.out.println("PKCS#7 SignedData Information3: \n" + p7sign3);
 		timeutil = new TimeUtil();
 		
 		boolean p7sign3_check = p7utilverify.verify(p7sign3);
 
-		System.out.println("����° PKCS#7 SignedData ����: " + p7sign3_check);
+		System.out.println("PKCS#7 SignedData Check3: " + p7sign3_check);
 		timeutil.check();
 	}
 

@@ -25,7 +25,8 @@ public class PKCS7RSAMutliSignFileTest {
 		
 		byte[] certBytes = FileUtil.readBytesFromFileName( certFilePath );
 		byte[] keyBytes = FileUtil.readBytesFromFileName( keyFilePath );
-		
+
+		//인증서객체생
 		CertUtil certutil = null;
 		try {
 			certutil = new CertUtil(certBytes);
