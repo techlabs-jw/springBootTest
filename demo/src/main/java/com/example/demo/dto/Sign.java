@@ -9,4 +9,6 @@ import lombok.Setter;
 public class Sign {
     private String SignData;
     private String SignType;
+    private String SignKind;
+    private String memberIndex;
 }

@@ -19,9 +19,19 @@ spring:
     resources:
       static-locations: classpath:/static/
       add-mappings: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://dev-crm.c5gi3j2ntrs4.ap-northeast-2.rds.amazonaws.com/crm?serverTimezone=UTC&characterEncoding=UTF-8
+    username: remote
+    password: dodo123@
 devtools:
   livereload:
     enabled: 'true'
 #cert
 cert:
   path: /testcert/test
+#mybatis
+mybatis:
+  type-aliases-package: com.example.demo.model
+  mapper-locations: /com/example/demo/mybatis/*.xml
+

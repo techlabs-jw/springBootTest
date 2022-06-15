@@ -95,6 +95,8 @@ public class PKCS7RSASignedAndEnvelopedTest
 		}
 		System.out.println("");
 		// ������, ������ Ű�� ����Ʈ�� ��ȯ end
+		//서명용 개인키, 개인키패스워드, 서명을 검증할 인증서, 암호화에 사용할인증서, 원문 데이터
+		//서명용 개인키, 서명용패스워드, 서명용 검증할 인정서, 서명할데이터
 		
 		CertUtil certutil = null;
 		try {

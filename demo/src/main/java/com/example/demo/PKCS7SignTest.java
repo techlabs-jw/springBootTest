@@ -3,13 +3,8 @@ package com.example.demo;//package test.pki2048;
 import java.util.*;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
-
-import com.google.gson.Gson;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
-import org.springframework.stereotype.Component;
 import signgate.crypto.util.CertUtil;
 import signgate.crypto.util.FileUtil;
 import signgate.crypto.util.PKCS7Util;
@@ -22,7 +17,7 @@ public class PKCS7SignTest
 	HashMap<String, String> hashMap = new HashMap<String, String>();
 	DefaultResourceLoader resourceLoader = new DefaultResourceLoader();
 
-	public List<Map<String, String>> SignTest(String encryptionData) throws Exception
+	public List<Map<String, String>> textSign(String encryptionData) throws Exception
 	{
 		String policy = null;
 		String startPoint = null;
