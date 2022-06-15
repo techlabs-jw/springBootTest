@@ -34,7 +34,8 @@ public class pageController {
 //    }
     @PostMapping(value = "/sign")
     @ResponseBody
-    public String sign(HttpServletResponse response,  @Validated @RequestBody Sign signDao) throws Exception {
+    //RequestBody-> ModelAttribute
+    public String sign(HttpServletResponse response,  @Validated @ModelAttribute Sign signDao) throws Exception {
         Gson gson = new Gson();
         String signType = "";
         String signKind = "";
