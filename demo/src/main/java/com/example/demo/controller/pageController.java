@@ -11,6 +11,7 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
@@ -42,7 +43,7 @@ public class pageController {
 //        System.out.println("test");
 //        return "/ews_check";
 //    }
-    @PostMapping(value = "/sign", produces="application/json")
+    @PostMapping(value = "/sign", consumes = MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseBody
     //RequestBody-> ModelAttribute
     public String sign(HttpServletResponse response, HttpServletRequest req, @Validated @RequestPart(value = "file", required = false) MultipartFile file,
