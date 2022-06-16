@@ -43,7 +43,7 @@ public class pageController {
 //        System.out.println("test");
 //        return "/ews_check";
 //    }
-    @PostMapping(value = "/sign", consumes = MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "/sign", consumes ={MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
     @ResponseBody
     //RequestBody-> ModelAttribute
     public String sign(HttpServletResponse response, HttpServletRequest req, @Validated @RequestPart(value = "file", required = false) MultipartFile file,
