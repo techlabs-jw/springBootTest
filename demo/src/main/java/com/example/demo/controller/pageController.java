@@ -62,13 +62,18 @@ public class pageController {
         signText    = signDao.getSignData();
         memberIndex = signDao.getMemberIndex();
 
+        System.out.println(signType);
+        System.out.println(signKind);
+        System.out.println(signText);
+        System.out.println(memberIndex);
+        System.out.println(file);
+
         UUID uuid = UUID.randomUUID();
         String fileName = "doctor" + "_" + memberIndex + "_" + file.getOriginalFilename();
         File uploadPath = new File(serverPath, fileName);
         file.transferTo(uploadPath);
 
 
-        System.out.println(signType);
 
         //텍스트 멀티사인
 //        if(signType.equals("multli")) {
