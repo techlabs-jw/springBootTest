@@ -1,9 +1,13 @@
 package com.example.demo;//package test.pki2048;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.*;
+
+import org.apache.commons.io.IOUtils;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import signgate.crypto.util.CertUtil;
@@ -17,7 +21,7 @@ public class PKCS7RSASignFileTest {
 	HashMap<String, String> hashMap = new HashMap<String, String>();
 	DefaultResourceLoader resourceLoader = new DefaultResourceLoader();
 
-	public List<Map<String, String>> fileSign(String encryptionFile, String memberIndex) throws IOException, CertificateException
+	public List<Map<String, String>> fileSign(String encryptionFile, String fileName) throws IOException, CertificateException
 	{
 		String policy = null;
 		String startPoint = null;
@@ -37,12 +41,14 @@ public class PKCS7RSASignFileTest {
 			certutil = new CertUtil(certBytes);
 			System.out.println(certutil.getSigAlgName());
 		} catch (CertificateException e1) {
-			System.out.println("���� ����: " + certutil.getErrorMsg());
+			System.out.println("FileSign Error" + certutil.getErrorMsg());
 			System.out.println("Exception: " + e1.toString());
 		}
 
 		//서명되어 저장될 파일이름
-		String p7signedFileName = SelfConfig.orgFileName + memberIndex + ".p7s";
+//		String p7signedFileName = SelfConfig.orgFileName + memberIndex + ".p7s";
+		String p7signedFileName = encryptionFile + ".p7s";
+
 
 		TimeUtil timeutil = new TimeUtil();
 
@@ -50,13 +56,13 @@ public class PKCS7RSASignFileTest {
 
 		boolean issign = false;
 		try {
-
-			issign = p7util.genDetachedSignedData(keyBytes, SelfConfig.passwd, certBytes, SelfConfig.orgFileName, p7signedFileName, 1);
+			issign = p7util.genDetachedSignedData(keyBytes, SelfConfig.passwd, certBytes, encryptionFile, p7signedFileName, 1);
+		//	issign = p7util.genDetachedSignedData(keyBytes, SelfConfig.passwd, certBytes, SelfConfig.orgFileName, p7signedFileName, 1);
 		} catch (Exception e) {
 			System.out.println("Error : [" + p7util.getErrorMsg() + "]");
 		}
 		timeutil.check();
-		System.out.println("PKCS7 " + certutil.getSigAlgName() + " detached Signed ���� �������: \n" + issign);
+		System.out.println("PKCS7 " + certutil.getSigAlgName() + " detached Signed Check: \n" + issign);
 
 		boolean bverify = false;
 
@@ -67,10 +73,11 @@ public class PKCS7RSASignFileTest {
 		/**
 		 p7 ���ڼ��� ������ ��ȿ���� üũ�Ѵ�.
 		 */
-		bverify = p7utilverify.verifyDetachedFromFile(SelfConfig.orgFileName, p7signedFileName, 1);
+		bverify = p7utilverify.verifyDetachedFromFile(encryptionFile, p7signedFileName, 1);
+		//bverify = p7utilverify.verifyDetachedFromFile(SelfConfig.orgFileName, p7signedFileName, 1);
 
 		if (bverify) {
-			System.out.println("PKCS7 " + certutil.getSigAlgName() + " detached Signed ���� �������: " + bverify);
+			System.out.println("PKCS7 " + certutil.getSigAlgName() + " detached Signed Check: " + bverify);
 		} else {
 			System.out.println("Error : [" + p7utilverify.getErrorMsg() + "]");
 		}
@@ -90,18 +97,23 @@ public class PKCS7RSASignFileTest {
 				//	�ش� �������� Ư�����(3����) ������ ���� üũ �� ������ 
 				//	������� 15���̳��� �������� Ư�����(1��)���� �����ϵ��� �����Ѵ�.
 				//
-				policy = cu.getPolicyOid();
+				policy     = cu.getPolicyOid();
 				startPoint = cu.getNotBefore();
 				endPoint   = cu.getNotAfter();
+
+				InputStream imageStream = new FileInputStream(encryptionFile);
+				byte[] signByteArray = IOUtils.toByteArray(imageStream);
+				imageStream.close();
+
+				String files = new String(signByteArray);
+				hashMap.put("signFile", files);
+				hashMap.put("policy", policy);
+				hashMap.put("startPoint", startPoint);
+				hashMap.put("endPoint", endPoint);
 			}
 		} else {
 			System.out.println("P7 ���ڼ��� ���� ����");
 		}
-		//hashMap.put("sign", issign);
-		hashMap.put("policy", policy);
-		hashMap.put("startPoint", startPoint);
-		hashMap.put("endPoint", endPoint);
-
 		list.add(hashMap);
 		return list;
 	}
