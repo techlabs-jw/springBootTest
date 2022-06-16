@@ -68,11 +68,11 @@ public class pageController {
         System.out.println(memberIndex);
         System.out.println(file);
 
-//        UUID uuid = UUID.randomUUID();
-//        String fileName = "doctor" + "_" + memberIndex + "_" + file.getOriginalFilename();
-//        File uploadPath = new File(serverPath, fileName);
-//        file.transferTo(uploadPath);
+        String fileName = "doctor" + "_" + memberIndex + "_" + file.getOriginalFilename();
+        File uploadPath = new File(serverPath, fileName);
+        file.transferTo(uploadPath);
 
+//        UUID uuid = UUID.randomUUID();
         //텍스트 멀티사인
 //        if(signType.equals("multli")) {
 //            PKCS7RSAMutliSignTest multliSignClass = new PKCS7RSAMutliSignTest();
@@ -87,9 +87,9 @@ public class pageController {
             //파일 싱글사인
             if(signKind.equals("file")) {
                 PKCS7RSASignFileTest fileSignClass = new PKCS7RSASignFileTest();
-                //String uploadFilePath = serverPath + fileName;
-                String uploadFilePath = serverPath + "kmCert.der";
-                returnData = fileSignClass.fileSign(uploadFilePath, "kmCert.der");
+                String uploadFilePath = serverPath + fileName;
+                //String uploadFilePath = serverPath + "kmCert.der";
+                returnData = fileSignClass.fileSign(uploadFilePath, fileName);
 
             }
         }
