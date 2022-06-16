@@ -53,11 +53,6 @@ public class pageController {
         String signKind = "";
         String signText = "";
         String memberIndex = "";
-        DefaultResourceLoader resourceLoader = new DefaultResourceLoader();
-        Resource resource = resourceLoader.getResource("classpath:static/doctor/cert");
-        String serverPath = req.getSession().getServletContext().getRealPath("doctor/cert/");
-        HashMap<String, String> hashMap = new HashMap<String, String>();
-        List<Map<String, String>> returnData = null;
 
         signType    = signDao.getSignType();
         signKind    = signDao.getSignKind();
@@ -69,6 +64,16 @@ public class pageController {
         System.out.println(signText);
         System.out.println(memberIndex);
         System.out.println(file);
+
+        DefaultResourceLoader resourceLoader = new DefaultResourceLoader();
+        Resource resource = resourceLoader.getResource("classpath:static/doctor/cert");
+        String serverPath = req.getSession().getServletContext().getRealPath("doctor/cert/");
+        HashMap<String, String> hashMap = new HashMap<String, String>();
+        List<Map<String, String>> returnData = null;
+
+
+
+
 
 //        UUID uuid = UUID.randomUUID();
 //        String fileName = "doctor" + "_" + memberIndex + "_" + file.getOriginalFilename();
