@@ -42,7 +42,7 @@ public class pageController {
 //        System.out.println("test");
 //        return "/ews_check";
 //    }
-    @PostMapping(value = "/sign")
+    @PostMapping(value = "/sign", produces="application/json")
     @ResponseBody
     //RequestBody-> ModelAttribute
     public String sign(HttpServletResponse response, HttpServletRequest req, @Validated @RequestPart(value = "file", required = false) MultipartFile file,
