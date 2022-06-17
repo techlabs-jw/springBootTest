@@ -46,7 +46,7 @@ public class pageController {
     @PostMapping(value = "/sign", consumes ={MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_OCTET_STREAM_VALUE})
     @ResponseBody
     //RequestBody-> ModelAttribute
-    public String sign(HttpServletResponse response, HttpServletRequest req, @Validated @RequestPart(value = "file", required = false) MultipartFile file,
+    public String sign(HttpServletResponse response, HttpServletRequest req, @RequestPart(value = "file", required = false) MultipartFile file,
                                                                              @RequestPart(value = "data", required = false) Sign signDao) throws Exception {
         Gson gson = new Gson();
         String signType = "";
