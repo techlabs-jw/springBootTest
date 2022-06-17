@@ -56,7 +56,7 @@ public class PKCS7RSASignFileTest {
 
 		boolean issign = false;
 		try {
-			issign = p7util.genDetachedSignedData(keyBytes, SelfConfig.passwd, certBytes, encryptionFile, p7signedFileName, 1);
+			issign = p7util.genSignedData(keyBytes, SelfConfig.passwd, certBytes, encryptionFile, p7signedFileName, 1);
 		//	issign = p7util.genDetachedSignedData(keyBytes, SelfConfig.passwd, certBytes, SelfConfig.orgFileName, p7signedFileName, 1);
 		} catch (Exception e) {
 			System.out.println("Error : [" + p7util.getErrorMsg() + "]");

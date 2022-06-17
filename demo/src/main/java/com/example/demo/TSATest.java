@@ -1,4 +1,5 @@
 package com.example.demo;//package test.pki2048;
+import signgate.crypto.util.FileUtil;
 import signgate.crypto.util.TSPUtil;
 
 public class TSATest {
@@ -28,6 +29,7 @@ public class TSATest {
 			//String passwd = "test";
 			String passwd = "kepco145";
 			TSPUtil tu = new TSPUtil(tsaServer, port, id, passwd);
+			String signFile = FileUtil.readStringFromFileName("FilePath");
 			tu.setTimeout(5000);
 			//Ÿ�ӽ�������ū ��Ʈ���� ������
 			String timeStampToken = tu.getTimeStamp("aa");
